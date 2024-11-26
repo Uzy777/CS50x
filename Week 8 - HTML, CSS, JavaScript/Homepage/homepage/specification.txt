@@ -1,0 +1,41 @@
+HTML Tags:
+
+    <nav> - Used for the navigation bar, containing links to different sections of the website.
+    <header> - Used for the hero section at the top of the page, displaying the welcome message and call-to-action button.
+    <div> - Used as a container for grouping content and aligning elements.
+    <button> - Used for clickable buttons, such as the "Scroll to Top" button and the "Learn More" button.
+    <ul> - Used for unordered lists, specifically for the navigation links in the navbar.
+    <li> - Used for individual list items in the navigation menu.
+    <h1>, <h2> - Used for main and subheadings throughout the page.
+    <p> - Used for paragraphs of text.
+    <a> - Used for hyperlinks to navigate between pages.
+    <footer> - Used for the footer section containing copyright and additional navigation links.
+    <img> - Used for displaying images (such as placeholders or product images).
+    <script> - Used to include JavaScript for interactivity, including the scroll-to-top functionality.
+
+CSS Properties:
+
+    font-family - Defines the typeface used for the text across the website.
+    background-color - Specifies the background colors for different sections (e.g., navbar, footer).
+    margin - Adds spacing around elements.
+    text-align - Aligns text within elements (e.g., centering headings and paragraphs).
+    color - Specifies the color of text elements.
+    padding - Provides space within elements, such as in the footer and main content sections.
+    border-radius - Applies rounded corners to images and buttons for a smooth visual style.
+    position - Used for fixed positioning of elements (e.g., the footer at the bottom of the page).
+
+Bootstrap Integration:
+
+    Navbar: Used the navbar component to create a responsive, collapsible navigation menu.
+    Buttons: Utilized Bootstrap’s button styles (btn btn-primary, btn btn-light, btn-outline-primary) for interactive elements like the scroll-to-top button and call-to-action buttons.
+    Grid System: Applied the container and row classes for structured layout with two columns in the main content section.
+    Utilities: Used Bootstrap’s utility classes like text-center, ms-auto, img-fluid, and d-flex for quick styling of text alignment, image responsiveness, and layout flexibility.
+
+JavaScript:
+
+    Scroll-to-Top Button: Implemented functionality to display the scroll-to-top button when the user scrolls down the page. The button is hidden when at the top and appears when scrolling down, allowing users to quickly return to the top of the page.
+
+Interactivity:
+
+    The scroll-to-top button is made visible by JavaScript as the user scrolls down, and hidden again when at the top of the page.
+    Clicking the button scrolls the page smoothly to the top.
