@@ -56,6 +56,11 @@ def get_movie_details(tmdb_id):
     recommendations_response = requests.get(recommendations_url)
     recommendations_data = recommendations_response.json()
 
+    # Fetch movie images (photos)
+    images_url = f"{TMDB_BASE_URL}/movie/{tmdb_id}/images?api_key={tmdb_key}"
+    images_response = requests.get(images_url)
+    images_data = images_response.json()
+
     imdb_id = movie_details.get("imdb_id")
     parents_guide_url = f"https://www.imdb.com/title/{imdb_id}/parentalguide/" if imdb_id else None
 
@@ -63,6 +68,7 @@ def get_movie_details(tmdb_id):
     movie_details['recommendations'] = recommendations_data.get('results', [])
     movie_details['parents_guide_url'] = parents_guide_url
     movie_details['cast'] = cast_data.get('cast', [])
+    movie_details['images'] = images_data.get('backdrops', [])  # Storing backdrops for images
 
     return jsonify(movie_details)
 

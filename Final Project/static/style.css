@@ -15,58 +15,72 @@ body {
     flex-direction: column; /* Stack elements vertically */
     justify-content: flex-start; /* Align items at the top */
     align-items: center; /* Center horizontally */
-    padding: 20px;
+    padding: 2rem; /* Scalable padding */
     margin: 0; /* Ensures the body stretches full width */
+    font-size: 1rem; /* Base font size for better scaling */
 }
 
 /* Main Container */
 .container {
     width: 100%;
-    max-width: 1200px; /* Increased max-width for larger screens */
-    padding: 30px;
+    max-width: 1200px; /* Maximum width for large screens */
+    padding: 2rem;
     background-color: white;
     border-radius: 12px; /* Rounded corners for modern feel */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 2rem; /* Scalable gap */
     margin: 0 auto; /* Centers the container horizontally */
 }
 
 /* Heading */
 h1 {
-    font-size: 2.2rem;
+    font-size: 2.2rem; /* Adjusted for consistency */
     font-weight: 600;
     text-align: center;
     color: #2b2b2b;
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
 }
 
-
+/* Subheading */
 h2 {
-    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px; /* Space below headings */
+    font-size: 2.5rem; /* Scalable for h2 */
+    font-weight: 600;
+}
+
+h3 {
+    margin-top: 20px;
+    margin-bottom: 20px; /* Space below headings */
+    font-size: 2rem; /* Scalable, a bit smaller than h2 */
+    font-weight: 500; /* Slightly lighter weight for visual hierarchy */
 }
 
 
+/* Paragraphs */
 p {
-    font-size: 24px;
+    font-size: 1.2rem; /* Standard font size for paragraphs */
+    line-height: 1.6;
+    margin-bottom: 1rem;
 }
 
 /* Search Bar Styling */
 #search-query {
     width: 100%;
     max-width: 800px; /* Wider search bar on large screens */
-    padding: 15px;
-    font-size: 18px;
+    padding: 1rem;
+    font-size: 1rem;
     border-radius: 12px; /* Rounded corners for input */
     border: 2px solid #ccc;
     outline: none;
     background-color: #f9fafb;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    margin-top: 20px; /* Position below heading */
-    margin-left: auto; /* Center the search bar */
-    margin-right: auto; /* Center the search bar */
+    margin-top: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Focus effect for search bar */
@@ -77,61 +91,70 @@ p {
 
 /* Movie Details Section */
 #movie-details {
-    padding: 20px;
+    padding: 2rem;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-    margin-top: 30px;
+    margin-top: 2rem;
 }
 
 /* Movie Header (Image and Info) */
 .movie-header {
     display: flex;
-    gap: 40px; /* Increased gap */
+    gap: 2rem; /* Increased gap */
     align-items: center;
     flex-wrap: wrap; /* Allow wrapping for responsiveness */
 }
 
 .movie-header img {
-    width: 250px; /* Increased image width */
+    width: 15vw; /* Responsive width relative to viewport width */
+    max-width: 250px; /* Max width for larger images */
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .movie-info {
     flex: 1;
+    font-size: 1rem; /* Standard font size for movie info */
 }
 
 .movie-info p {
     font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     color: #555;
 }
 
 /* Trailers Section */
 .trailer-list {
     display: flex;
-    gap: 40px; /* Increased gap between trailers */
+    gap: 2rem; /* Increased gap between trailers */
     flex-wrap: wrap;
 }
 
 /* Recommendations Section */
 .recommendation-list {
     display: flex;
-    gap: 40px; /* Increased gap between recommendations */
+    gap: 2rem; /* Increased gap between recommendations */
     overflow-x: auto;
-    padding: 10px 0;
+    padding: 1rem 0;
+}
+
+/* Recommendations Section */
+.recommendation-list img {
+    width: 180px; /* Set a fixed width */
+    height: 250px; /* Set a fixed height */
 }
 
 /* Responsive Layout */
 @media (max-width: 768px) {
     body {
-        padding: 10px; /* Slight padding for small screens */
+        padding: 1rem; /* Slight padding for small screens */
+        font-size: 1rem; /* Base font size */
     }
 
     .container {
-        padding: 20px;
+        padding: 1rem;
         max-width: 100%; /* Full width on smaller screens */
     }
 
@@ -150,23 +173,21 @@ p {
 
     .trailer-list {
         flex-direction: column;
-        gap: 20px;
+        gap: 1rem;
     }
 
-    .recommendation-list {
+    /* .recommendation-list {
         flex-direction: column;
-        gap: 20px;
-    }
+        gap: 1rem;
+    } */
 }
-
-
 
 /* Cast Container */
 .cast-container {
     display: flex;
-    gap: 20px; /* Space between actors */
+    gap: 1.5rem; /* Space between actors */
     overflow-x: auto; /* Allow horizontal scrolling if there are many cast members */
-    padding-bottom: 10px;
+    padding-bottom: 1rem;
 }
 
 .cast-member {
@@ -174,15 +195,121 @@ p {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 150px; /* Consistent width for each cast member */
 }
 
 .cast-member img {
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add a slight shadow around the actor's image */
-}
+    width: 150px; /* Set a fixed width */
+    height: 200px; /* Set a fixed height */
+    border-radius: 0; /* Remove the rounded corners for square shape */
+    object-fit: cover; /* Ensures the image covers the container area without distortion */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 0 15px rgba(0, 0, 0, 0.1); /* Elevated shadow effect */
+    border: 2px solid #e5e5e5; /* Light border around the image */
+    padding: 5px; /* Adds space between the image and shadow */
+    background-color: #fff; /* White background for clean edges */}
+
 
 .cast-member p {
-    margin-top: 5px;
+    margin-top: 1rem;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 1rem;
 }
+
+
+
+.photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.photo-gallery .photo img {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.photo-gallery .photo img:hover {
+    transform: scale(1.05);
+}
+
+.carousel-container {
+    position: relative;
+    max-width: 600px;
+    margin: auto;
+}
+
+.carousel-images {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-slide {
+    display: none;
+    width: 100%;
+    text-align: center;
+}
+
+.carousel-img {
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.carousel-img:hover {
+    transform: scale(1.05);
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+    transition: background-color 0.3s;
+}
+
+.carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+
+
+/* Highlighting search dropdown items on hover */
+.suggestion-item:hover {
+    background-color: #f0f0f0; /* Light gray */
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Highlighting recommendation items on hover */
+.recommendation:hover {
+    background-color: #f9f9f9; /* Even lighter gray */
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+/* Highlighting hyperlinks on hover */
+a:hover {
+    text-decoration: underline; /* Adds underline */
+    color: #007bff; /* Bright blue color */
+    transition: color 0.2s ease-in-out;
+}
+
+
+

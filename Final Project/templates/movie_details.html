@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ movie_details.Title }}</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
     <div class="container">
         <!-- Movie Details Header -->
@@ -32,11 +34,19 @@
 
         <!-- IMDb Parents Guide Link -->
         <div class="parents-guide">
-            <a href="https://www.imdb.com/title/{{ movie_details.imdbID }}/parentalguide" target="_blank">View IMDb Parents Guide</a>
+            <a href="https://www.imdb.com/title/{{ movie_details.imdbID }}/parentalguide" target="_blank">View IMDb
+                Parents Guide</a>
         </div>
     </div>
+
+    <!-- Movie Images Section -->
+    <div id="image-container" class="image-container">
+        <!-- Images will be dynamically inserted here -->
+    </div>
+
 
     <!-- Add FontAwesome for star icon -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </body>
+
 </html>

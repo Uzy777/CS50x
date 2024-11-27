@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Search</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Search for a Movie or Show</h1>
-        <input
-            type="text"
-            id="search-query"
-            placeholder="Search for a movie/show"
-            autocomplete="off"
-        />
+        <input type="text" id="search-query" placeholder="Search for a movie/show" autocomplete="off" />
         <div class="suggestions" id="suggestions"></div>
 
         <div id="movie-details"></div>
-    </div>
+        <div id="image-container" class="image-container">
+        </div>
 
-    <script src="/static/script.js"></script>
+        <script src="/static/script.js"></script>
 </body>
+
 </html>
