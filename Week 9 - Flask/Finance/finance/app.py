@@ -35,21 +35,155 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    return apology("TODO")
+    user_id = session["user_id"]
+
+    # Query for user's stocks
+    stocks = db.execute(
+        "SELECT symbol, SUM(shares) as shares FROM transactions WHERE user_id = ? GROUP BY symbol HAVING SUM(shares) > 0",
+        user_id,
+    )
+
+    # Query for user's cash balance
+    rows = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
+    cash = rows[0]["cash"]
+
+    # Prepare data for the template
+    portfolio = []
+    grand_total = cash
+
+    for stock in stocks:
+        stock_info = lookup(stock["symbol"])
+        total = stock["shares"] * stock_info["price"]
+        grand_total += total
+        portfolio.append(
+            {
+                "symbol": stock["symbol"],
+                "name": stock_info["name"],
+                "shares": stock["shares"],
+                "price": stock_info["price"],
+                "total": total,
+            }
+        )
+
+    return render_template(
+        "index.html", stocks=portfolio, cash=cash, grand_total=grand_total
+    )
 
 
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
 def buy():
     """Buy shares of stock"""
-    return apology("TODO")
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+        stock = lookup(symbol)
+        shares = request.form.get("shares")
+
+        if not stock:
+            return apology("Invalid stock symbol", 400)
+
+        try:
+            shares = int(shares)
+            if shares <= 0:
+                return apology("Input a positive number", 400)
+
+        except ValueError:
+            return apology("Input a valid number", 400)
+
+        # Calculations for the purchase
+        price = stock["price"]
+        total_cost = shares * price
+
+        # Query user's cash balance
+        user_id = session["user_id"]
+        rows = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
+        cash = rows[0]["cash"]
+
+        if cash < total_cost:
+            return apology("You don't have enough cash", 400)
+
+        # Check if the user already has shares of the stock
+        existing_shares = db.execute(
+            "SELECT shares FROM transactions WHERE user_id = ? AND symbol = ?",
+            user_id,
+            symbol,
+        )
+
+        if existing_shares:
+            # Update the existing transaction
+            db.execute(
+                "UPDATE transactions SET shares = shares + ?, price = ? WHERE user_id = ? AND symbol = ?",
+                shares,
+                price,
+                user_id,
+                symbol,
+            )
+        else:
+            # Insert a new transaction
+            db.execute(
+                "INSERT INTO transactions (user_id, symbol, shares, price) VALUES(?, ?, ?, ?)",
+                user_id,
+                symbol,
+                shares,
+                price,
+            )
+
+        # Update the user's cash balance
+        db.execute("UPDATE users SET cash = cash - ? WHERE id = ?", total_cost, user_id)
+
+        # Query the updated cash balance
+        rows = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
+        cash = rows[0]["cash"]
+
+        # Query for user's stocks
+        stocks = db.execute(
+            "SELECT symbol, SUM(shares) as shares FROM transactions WHERE user_id = ? GROUP BY symbol HAVING SUM(shares) > 0",
+            user_id,
+        )
+
+        # Prepare data for the template
+        portfolio = []
+        grand_total = cash
+
+        for stock in stocks:
+            stock_info = lookup(stock["symbol"])
+            total = stock["shares"] * stock_info["price"]
+            grand_total += total
+            portfolio.append(
+                {
+                    "symbol": stock["symbol"],
+                    "name": stock_info["name"],
+                    "shares": stock["shares"],
+                    "price": stock_info["price"],
+                    "total": total,
+                }
+            )
+
+        return render_template(
+            "index.html", stocks=portfolio, cash=cash, grand_total=grand_total
+        )
+
+    # Query the user's cash balance for GET request
+    user_id = session["user_id"]
+    rows = db.execute("SELECT cash FROM users WHERE id = ?", user_id)
+    cash = rows[0]["cash"]
+
+    return render_template("buy.html", cash=cash)
 
 
 @app.route("/history")
 @login_required
 def history():
     """Show history of transactions"""
-    return apology("TODO")
+    user_id = session["user_id"]
+
+    # Query for all transactions of the user
+    transactions = db.execute(
+        "SELECT symbol, shares, price, transacted FROM transactions WHERE user_id = ? ORDER BY transacted DESC",
+        user_id,
+    )
+
+    return render_template("history.html", transactions=transactions)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -106,17 +240,104 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
-    return apology("TODO")
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+        stock = lookup(symbol)
+        if stock:
+            return render_template("quoted.html", stock=stock)
+        else:
+            return apology("Invalid stock symbol", 400)
+
+    return render_template("quote.html")
 
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    return apology("TODO")
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+        confirmation = request.form.get("confirmation")
+
+        # Check if username or password or confirmation is blank
+        if not username or not password or not confirmation:
+            return apology("must provide username and password", 400)
+
+        # Check if the password and confirmation match
+        if not password == confirmation:
+            return apology("password does not match", 400)
+
+        # Hash the password
+        hashed_password = generate_password_hash(
+            password, method="scrypt", salt_length=16
+        )
+
+        # Try to insert the new user into the database
+        try:
+            db.execute(
+                "INSERT INTO users (username, hash) VALUES(?, ?)",
+                username,
+                hashed_password,
+            )
+        except ValueError:
+            return apology("username already exists", 400)
+
+    return render_template("register.html")
 
 
 @app.route("/sell", methods=["GET", "POST"])
 @login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+    user_id = session["user_id"]
+
+    if request.method == "POST":
+        symbol = request.form.get("symbol")
+        shares = request.form.get("shares")
+
+        if not symbol:
+            return apology("Must select a stock", 400)
+
+        try:
+            shares = int(shares)
+            if shares <= 0:
+                return apology("Must input a positive number", 400)
+        except ValueError:
+            return apology("Must input a valid number", 400)
+
+        # Query for user's shares of the stock
+        rows = db.execute(
+            "SELECT SUM(shares) as total_shares FROM transactions WHERE user_id = ? AND symbol = ?",
+            user_id,
+            symbol,
+        )
+        if len(rows) != 1 or rows[0]["total_shares"] < shares:
+            return apology("Not enough shares", 400)
+
+        # Calculate the total sale value
+        stock = lookup(symbol)
+        total_value = shares * stock["price"]
+
+        # Update the transactions for the sale
+        db.execute(
+            "UPDATE transactions SET shares = shares - ?, price = ? WHERE user_id = ? AND symbol = ?",
+            shares,
+            stock["price"],
+            user_id,
+            symbol,
+        )
+
+        # Update the user's cash balance
+        db.execute(
+            "UPDATE users SET cash = cash + ? WHERE id = ?", total_value, user_id
+        )
+
+        return redirect("/")
+
+    else:
+        # Query for user's owned stocks
+        stocks = db.execute(
+            "SELECT symbol FROM transactions WHERE user_id = ? GROUP BY symbol HAVING SUM(shares) > 0",
+            user_id,
+        )
+        return render_template("sell.html", stocks=stocks)
