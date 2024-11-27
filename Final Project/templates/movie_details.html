@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie_details.Title }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Movie Details Header -->
+        <h1>{{ movie_details.Title }} ({{ movie_details.Year }})</h1>
+
+        <!-- Rating Section -->
+        <div class="rating">
+            <i class="fas fa-star"></i>
+            <span>{{ movie_details.imdbRating }} / 10</span>
+        </div>
+
+        <!-- Movie Poster -->
+        <div class="movie-poster">
+            <img src="{{ movie_details.Poster }}" alt="{{ movie_details.Title }}">
+        </div>
+
+        <!-- Movie Description -->
+        <div class="movie-description">
+            <p><strong>Plot:</strong> {{ movie_details.Plot }}</p>
+            <p><strong>Cast:</strong> {{ movie_details.Actors }}</p>
+            <p><strong>Genre:</strong> {{ movie_details.Genre }}</p>
+            <p><strong>Runtime:</strong> {{ movie_details.Runtime }}</p>
+        </div>
+
+        <!-- IMDb Parents Guide Link -->
+        <div class="parents-guide">
+            <a href="https://www.imdb.com/title/{{ movie_details.imdbID }}/parentalguide" target="_blank">View IMDb Parents Guide</a>
+        </div>
+    </div>
+
+    <!-- Add FontAwesome for star icon -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

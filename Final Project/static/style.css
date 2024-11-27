@@ -1,0 +1,188 @@
+/* Global Reset for margin, padding, and box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fb; /* Light background for a soft look */
+    color: #333;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: flex-start; /* Align items at the top */
+    align-items: center; /* Center horizontally */
+    padding: 20px;
+    margin: 0; /* Ensures the body stretches full width */
+}
+
+/* Main Container */
+.container {
+    width: 100%;
+    max-width: 1200px; /* Increased max-width for larger screens */
+    padding: 30px;
+    background-color: white;
+    border-radius: 12px; /* Rounded corners for modern feel */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 0 auto; /* Centers the container horizontally */
+}
+
+/* Heading */
+h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-align: center;
+    color: #2b2b2b;
+    margin-bottom: 20px;
+}
+
+
+h2 {
+    font-size: 40px;
+}
+
+
+p {
+    font-size: 24px;
+}
+
+/* Search Bar Styling */
+#search-query {
+    width: 100%;
+    max-width: 800px; /* Wider search bar on large screens */
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 12px; /* Rounded corners for input */
+    border: 2px solid #ccc;
+    outline: none;
+    background-color: #f9fafb;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-top: 20px; /* Position below heading */
+    margin-left: auto; /* Center the search bar */
+    margin-right: auto; /* Center the search bar */
+}
+
+/* Focus effect for search bar */
+#search-query:focus {
+    border-color: #1e90ff; /* Blue border on focus */
+    box-shadow: 0 0 12px rgba(30, 144, 255, 0.4); /* Blue glow */
+}
+
+/* Movie Details Section */
+#movie-details {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    margin-top: 30px;
+}
+
+/* Movie Header (Image and Info) */
+.movie-header {
+    display: flex;
+    gap: 40px; /* Increased gap */
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping for responsiveness */
+}
+
+.movie-header img {
+    width: 250px; /* Increased image width */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.movie-info {
+    flex: 1;
+}
+
+.movie-info p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Trailers Section */
+.trailer-list {
+    display: flex;
+    gap: 40px; /* Increased gap between trailers */
+    flex-wrap: wrap;
+}
+
+/* Recommendations Section */
+.recommendation-list {
+    display: flex;
+    gap: 40px; /* Increased gap between recommendations */
+    overflow-x: auto;
+    padding: 10px 0;
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    body {
+        padding: 10px; /* Slight padding for small screens */
+    }
+
+    .container {
+        padding: 20px;
+        max-width: 100%; /* Full width on smaller screens */
+    }
+
+    #search-query {
+        max-width: 100%; /* Full width on small screens */
+    }
+
+    .movie-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-info {
+        text-align: center;
+    }
+
+    .trailer-list {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .recommendation-list {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+
+
+/* Cast Container */
+.cast-container {
+    display: flex;
+    gap: 20px; /* Space between actors */
+    overflow-x: auto; /* Allow horizontal scrolling if there are many cast members */
+    padding-bottom: 10px;
+}
+
+.cast-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.cast-member img {
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add a slight shadow around the actor's image */
+}
+
+.cast-member p {
+    margin-top: 5px;
+    font-weight: 600;
+    font-size: 14px;
+}
