@@ -1,5 +1,7 @@
 # Movie Info Web App (CS50x Final Project)
 
+Video: <https://streamable.com/9h6rua>
+
 ## Project Overview
 
 The Movie Info Web App allows users to search for a movie or show and view detailed information about it. The app provides IMDb ratings, cast information, general movie/show details, embedded trailers, and the IMDb Parents Guide section. Additionally, users can switch between light and dark modes based on their system preferences, with a toggle button for manual switching. External links to IMDb pages and other resources are also provided.
