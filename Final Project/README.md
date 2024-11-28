@@ -192,3 +192,5 @@ flask --app app.py --debug run
 ```
 
 This will start the application, and you can view it in your browser at http://localhost:5000.
+
+:)
