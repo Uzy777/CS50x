@@ -20,11 +20,11 @@ function onPageLoad() {
 async function onSearchInput() {
     const query = searchInput.value.trim();
     if (query.length > 2) {
-        localStorage.setItem("searchQuery", query);  // Save the query to localStorage
+        localStorage.setItem("searchQuery", query); // Save the query to localStorage
         const data = await fetchSearchResults(query);
         updateSuggestions(data);
     } else {
-        suggestionsDiv.innerHTML = "";  // Clear suggestions if query is too short
+        suggestionsDiv.innerHTML = ""; // Clear suggestions if query is too short
     }
 }
 
@@ -60,7 +60,7 @@ function createSuggestionItem(item) {
 // Handle click on a suggestion item
 function onSuggestionClick(item) {
     showMovieDetails(item.id);
-    suggestionsDiv.innerHTML = "";  // Clear suggestions on selection
+    suggestionsDiv.innerHTML = ""; // Clear suggestions on selection
 }
 
 // Display movie details
